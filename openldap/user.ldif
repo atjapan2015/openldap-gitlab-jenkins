@@ -1,0 +1,47 @@
+dn: ou=groups,dc=example,dc=org
+objectclass: top
+objectclass: organizationalUnit
+ou: groups
+
+dn: cn=admin,ou=groups,dc=example,dc=org
+cn: admin
+objectclass: groupOfUniqueNames
+objectclass: top
+uniquemember: uid=jenkins,ou=people,dc=example,dc=org
+
+dn: cn=user,ou=groups,dc=example,dc=org
+cn: user
+objectclass: groupOfUniqueNames
+objectclass: top
+uniquemember: uid=user,ou=people,dc=example,dc=org
+uniquemember: uid=jenkins,ou=people,dc=example,dc=org
+
+dn: ou=people,dc=example,dc=org
+objectclass: top
+objectclass: organizationalUnit
+ou: people
+
+dn: uid=jenkins,ou=people,dc=example,dc=org
+cn: jenkins
+mail: jenkins@example.org
+objectclass: top
+objectclass: person
+objectclass: organizationalPerson
+objectclass: inetOrgPerson
+sn: jenkins
+givenName: jenkins
+uid: jenkins
+userpassword: {MD5}jenkins
+
+
+dn: uid=user,ou=people,dc=example,dc=org
+cn: user
+mail: user@example.org
+objectclass: top
+objectclass: person
+objectclass: organizationalPerson
+objectclass: inetOrgPerson
+sn: user
+givenName: user
+uid: user
+userpassword: {MD5}user

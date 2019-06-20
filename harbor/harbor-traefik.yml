@@ -1,0 +1,50 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: harbor
+  namespace: harbor
+  annotations:
+    kubernetes.io/ingress.class: traefik
+spec:
+  rules:
+  - host: core.harbor.k8s.dix.asia
+    http:
+      paths:
+      - backend:
+          serviceName: home-harbor-harbor-portal
+          servicePort: 80
+        path: /
+      - backend:
+          serviceName: home-harbor-harbor-core
+          servicePort: 80
+        path: /api/
+      - backend:
+          serviceName: home-harbor-harbor-core
+          servicePort: 80
+        path: /service/
+      - backend:
+          serviceName: home-harbor-harbor-core
+          servicePort: 80
+        path: /v2/
+      - backend:
+          serviceName: home-harbor-harbor-core
+          servicePort: 80
+        path: /chartrepo/
+      - backend:
+          serviceName: home-harbor-harbor-core
+          servicePort: 80
+        path: /c/
+  - host: notary.harbor.k8s.dix.asia
+    http:
+      paths:
+      - backend:
+          serviceName: home-harbor-harbor-notary-server
+          servicePort: 4443
+        path: /
+  tls:
+  - hosts:
+    - core.harbor.k8s.dix.asia
+    secretName: home-harbor-harbor-ingress
+  - hosts:
+    - notary.harbor.k8s.dix.asia
+    secretName: home-harbor-harbor-ingress   
