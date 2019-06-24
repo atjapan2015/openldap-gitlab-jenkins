@@ -1,0 +1,7 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: gitlab
+  namespace: public-service
+spec:
+  host: gitlab-balancer.public-service.svc.cluster.local

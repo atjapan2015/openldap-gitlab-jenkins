@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: docker-registry
+  namespace: public-service
+data:
+  registry-config.yml: |
+    version: 0.1
+    storage:
+      cache:
+        blobdescriptor: inmemory
+      filesystem:
+        rootdirectory: /var/lib/registry
+    auth:
+      htpasswd:
+        realm: basic-realm
+        path: /auth/htpasswd

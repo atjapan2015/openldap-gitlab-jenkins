@@ -1,0 +1,42 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: ldap
+  namespace: default
+spec:
+  hosts:
+  - "*"
+  gateways:
+  - bookinfo-gateway
+  http:
+  - match: 
+    - uri: 
+        prefix: "/ldap/" 
+    rewrite:
+      uri: "/"
+    route:
+    - destination:
+        host: phpldapadmin.public-service.svc.cluster.local
+        port:
+          number: 8080
+  - match:
+    - uri:
+        exact: "/ldap/cmd.php?cmd=logout&server_id=1"
+    rewrite:
+      uri: "/cmd.php/cmd.php?cmd=logout&server_id=1"
+    route:
+    - destination:
+        host: phpldapadmin.public-service.svc.cluster.local
+        port:
+          number: 8080
+  - match:
+    - uri:
+        exact: "/ldap/cmd.php"
+    rewrite:
+      uri: "/cmd.php"
+    route:
+    - destination:
+        host: phpldapadmin.public-service.svc.cluster.local
+        port:
+          number: 8080
+

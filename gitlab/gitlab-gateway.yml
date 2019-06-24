@@ -1,0 +1,15 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: gitlab-gateway
+  namespace: public-service
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+  - hosts:
+    - 'gitlab.k8scloud.site'
+    port:
+      name: http
+      number: 80
+      protocol: HTTP

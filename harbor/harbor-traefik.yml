@@ -7,7 +7,7 @@ metadata:
     kubernetes.io/ingress.class: traefik
 spec:
   rules:
-  - host: core.harbor.k8s.dix.asia
+  - host: core.harbor.k8scloud.site
     http:
       paths:
       - backend:
@@ -34,7 +34,7 @@ spec:
           serviceName: home-harbor-harbor-core
           servicePort: 80
         path: /c/
-  - host: notary.harbor.k8s.dix.asia
+  - host: notary.harbor.k8scloud.site
     http:
       paths:
       - backend:
@@ -43,8 +43,8 @@ spec:
         path: /
   tls:
   - hosts:
-    - core.harbor.k8s.dix.asia
+    - core.harbor.k8scloud.site
     secretName: home-harbor-harbor-ingress
   - hosts:
-    - notary.harbor.k8s.dix.asia
+    - notary.harbor.k8scloud.site
     secretName: home-harbor-harbor-ingress   

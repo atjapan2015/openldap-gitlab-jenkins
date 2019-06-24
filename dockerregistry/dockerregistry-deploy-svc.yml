@@ -1,0 +1,44 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: k8sregistry-svc
+  namespace: public-service
+spec:
+  selector:
+    app: k8sregistry
+  type: NodePort
+  ports:
+  - protocol: TCP
+    port: 5000
+    targetPort: 5000
+    nodePort: 30005
+    name: registry-http
+---
+kind: Pod
+apiVersion: v1
+metadata:
+  name: k8sregistry-deploy
+  namespace: public-service
+  labels:
+    app: k8sregistry
+spec:
+  containers:
+    - name: pregistry
+      image: registry:2
+      ports:
+      - containerPort: 5000
+      env:
+      - name: REGISTRY_HTTP_TLS_CERTIFICATE
+        value: /certs/core.harbor.k8scloud.site.pem
+      - name: REGISTRY_HTTP_TLS_KEY
+        value: /certs/core.harbor.k8scloud.site.key
+      volumeMounts:
+      - mountPath: /certs
+        name: certs
+  volumes:
+  - name: certs
+    hostPath:
+    # directory location on host
+      path: /certs
+    # this field is optional
+      type: Directory

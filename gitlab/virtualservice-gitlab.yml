@@ -1,0 +1,19 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: gitlab
+  namespace: public-service
+spec:
+  hosts:
+  - "gitlab.k8scloud.site"
+  gateways:
+  - gitlab-gateway
+  http:
+  - match: 
+    - uri: 
+        prefix: "/" 
+    route:
+    - destination:
+        host: gitlab-balancer.public-service.svc.cluster.local
+        port:
+          number: 80
